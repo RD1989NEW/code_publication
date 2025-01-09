@@ -113,8 +113,9 @@ print(ski.__version__)
 
 
 # for file in glob.glob()
-#here use file OBIA_OSAVI_mit_Texture_NEW.csv as input path to create the input dataframe 
-#this is the foundation of the column selecltion, preprocessing and classification process
+#here use file OBIA_OSAVI_mit_Texture_NEW.csv as input path to create the input dataframe, also provided in the github repository/ exchange the path 
+#-the file contains the spectral, structural+texture features after the geoprocessing routines
+#this is the foundation of the column selection, preprocessing and classification process
 
 df_OBIA_comb_OSAVI_FINAL_texture=pd.read_csv("C:/Users/ronal/OneDrive/Dokumente/OBIA_OSAVI_mit_Texture_NEW/OBIA_OSAVI_mit_Texture_NEW.csv")
 
@@ -374,7 +375,7 @@ param_grid2=[{'n_estimators':[25, 50, 100, 150, 300, 500],
 #################################################################################
 #####################################################
 
-##Hypertuned Grid search parameters
+##Hyperparameters selection etc.
 ###################################################################
 ###SVM
 pipeline=Pipeline([
@@ -419,7 +420,7 @@ np.random.seed(42)###To get the same random seed
 kf_1_1=KFold(n_splits=10, shuffle=True)
 
 
-('The average Growth Class of the vine stocks\
+('The average Growth Class of the grapevines\
  in the investigation area is', mean_GC)
 ############################
 
