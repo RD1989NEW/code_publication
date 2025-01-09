@@ -143,9 +143,10 @@ print(os.__version__)
 
 
 ###########1 loading of the datasets and subsetting the dataset in the seven feature groups
-##selection of the features based on literature research and correlation strength with the Growth Classes (after Pearson)
+##selection of the features based on literature research and correlation strength (after Pearson) with the Growth Classes after Porten [43]
 ###input file is the csv which was generated through the extraction of the generated features with the vine- row mask and the spatial aggregation
-#file_name: "OBIA_OSAVI_mit_Texture_NEW.csv"- together in the directory sripts with the script itself
+#file_name: "OBIA_OSAVI_mit_Texture_NEW.csv"- together in the directory sripts with the script itself- this is the file path after geoprocessing/ spectral, structural and texture feature extraction
+#exchange this path with your path
 df_OBIA_comb_OSAVI_FINAL_texture = pd.read_csv("C:/Users/Ronald/Documents/Model_metrics_new_Pub_1/OBIA_OSAVI_mit_Texture_NEW.csv")
 
 
