@@ -53,11 +53,15 @@ packageVersion("data.table")
 print('dplyr version: ')
 packageVersion("dplyr")
 #input file with filename: "OSAVI_Mask_ZS_Supervised_Classes_F.csv" as base input for correlation and visualization
+#exchange with your path (file with the same filename is provided in the github repository)
 #OSAVI_mask_Arena_Veraison<- read.table("C:/Users/Ronald/Documents/Masken_with_Supervised_Classes/OSAVI_Mask_ZS_Supervised_Classes_F.csv", header=TRUE, sep=",", row.names = NULL, check.names = FALSE)
 #ALL_MASKS_MERGED_subset_1<-ALL_MASKS_MERGED[c( "W_03_08_i", "X_OSAVImean", "X_GNDVImean" ,"X_NDWImean","X_RVImean","V_OM","Diff_SAM_Bonitur" , "layer" )]
+
 #Texture dataframe
+#exchange with your path (file with the same filename is provided in the github repository)
 ALL_MASKS_MERGED_T<-read.csv("C:/Users/ronal/OneDrive/Dokumente/OBIA_OSAVI_mit_Texture_NEW/OBIA_OSAVI_mit_Texture_NEW.csv", sep=',', header=TRUE)
 ####NEW Texture dataframe iwth all Bands from OM textures
+#exchange with your path (file with the same filename is provided in the github repository)
 ALL_MASKS_MERGED_T<-read.csv("C:/Users/ronal/OneDrive/Dokumente/Textur_extract/OBIA_OSAVI_MASK_extract_text_NEW.csv", sep=',', header=TRUE)
 
 colnames(ALL_MASKS_MERGED_T)
@@ -78,6 +82,7 @@ ALL_MASKS_MERGED_T_subset_1<-ALL_MASKS_MERGED_T[c( "W_03_08_i", "X_OSAVImean", "
 ########################################
 
 ##other subset of the dataframe
+#exchange with your path (file with the same filename is provided in the github repository)
 ALL_MASKS_MERGED<-read.csv("D:/ALLE_MASKEN_MERGE_NEU/ALLE_MASKEN_ZUSAMMEN_MERGE_NEU_2.csv", sep=',', header=TRUE)
 
 ALL_MASKS_MERGED_subset_1<-na.omit(ALL_MASKS_MERGED_subset_1)
@@ -148,7 +153,7 @@ names(ALL_MASKS_MERGED_T_subset_1_CHM)[5]<-"CHM (range)"
 names(ALL_MASKS_MERGED_T_subset_1_CHM)[6]<-"Volume (CHM)"
 
 cordata_chm=cor(ALL_MASKS_MERGED_T_subset_1_CHM_n)
-#correlation of the texture features with the Growth Classes
+#correlation of the texture features with the Growth Classes after Porten [43]
 cordata_df_CHM<-as.data.frame(cordata_chm)
 colnames(cordata_chm)<-c("Growth", "CHM (mean)","CHM (std)", "CHM (max)", "CHM (range)", "Volume (CHM)")
 rownames(cordata_chm)<-c("Growth", "CHM (mean)","CHM (std)", "CHM (max)", "CHM (range)", "Volume (CHM)")
@@ -216,13 +221,14 @@ corrplot.mixed(cordata, lower="number", upper="pie",order="hclust")
 #coorplot(cordata, method=)
 
 print(cordata)
-
-write.csv2(cordata_df, 'C:/Users/ronal/OneDrive/Dokumente/Kreuztabellen_neu/Correlations_NEW.csv')
+#exchange outputfilepath for export of correlation matrix
+#write.csv2(cordata_df, 'C:/Users/ronal/OneDrive/Dokumente/Kreuztabellen_neu/Correlations_NEW.csv')
 
 colnames(ALL_MASKS_MERGED_T_subset_1)
 ALL_MASKS_MERGED_T_subset_1<-na.omit(ALL_MASKS_MERGED_T_subset_1)
 sapply(ALL_MASKS_MERGED_T_subset_1, typeof)
 
+###PCA (Principal Component)- biplot
 
 pca<-prcomp(ALL_MASKS_MERGED_T_subset_1[, c(2:46)], center=TRUE, scale=TRUE)
 summary(pca)
@@ -328,7 +334,7 @@ ALL_MASKS_MERGED_subset_2<-ALL_MASKS_MERGED[c( "W_03_08_i", "CLASS_ID_2", "CLASS
 colnames(ALL_MASKS_MERGED)
 ALL_MASKS_MERGED_subset_2$Growth<-as.factor(as.character(ALL_MASKS_MERGED_subset_2$W_03_08_i))
 ALL_MASKS_MERGED_subset_2<-na.omit(ALL_MASKS_MERGED_subset_2)
-
+##grouped frequency distribution plots and bivariate correlation with boxplots
 pm<-ggpairs(ALL_MASKS_MERGED_subset_2, columns=1:5, ggplot2::aes(color=Growth), title = "Growth Classes measured vs Models")+
   scale_fill_manual(values=c("red", "orangered", "orange", "cyan", "green", "darkgreen"))+
   scale_colour_manual(values =c("red", "orangered", "orange", "cyan", "green", "darkgreen" ))+theme(panel.grid.minor=element_blank, panel.grid.major = element_blank())+theme_bw()+theme(axis.text.x=element_text(angle=90, hjust=1))
