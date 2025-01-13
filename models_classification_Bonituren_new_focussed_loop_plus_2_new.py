@@ -110,7 +110,7 @@ print(sk.__version__)
 print(ski.__version__)
 #################################################
 
-
+###note adapt all output paths e.g. for csv. to your path
 
 # for file in glob.glob()
 #here use file OBIA_OSAVI_mit_Texture_NEW.csv as input path to create the input dataframe, also provided in the github repository/ exchange the path 
