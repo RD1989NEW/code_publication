@@ -114,7 +114,7 @@ from scipy import stats
 import scipy 
 ##RandomizedGridSearch
 
-
+###note adapt all output paths e.g. for csv. to your path
 
 
 # df_OBIA_comb_OSAVI_FINAL_texture=pd.read_csv("C:/Users/ronal/OneDrive/Dokumente/Textur_extract/OBIA_OSAVI_MASK_extract_text_NEW.csv")
